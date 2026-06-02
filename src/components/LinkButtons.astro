@@ -1,0 +1,57 @@
+---
+import type { LinkItem } from "../types";
+
+type Props = {
+  links: LinkItem[];
+  compact?: boolean;
+};
+
+const { links, compact = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const hrefFor = (href: string) => {
+  if (
+    href.startsWith("http") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("#") ||
+    href.startsWith("/")
+  ) {
+    return href;
+  }
+
+  return `${base}${href}`;
+};
+---
+
+<div class:list={["link-buttons", compact && "link-buttons--compact"]}>
+  {
+    links.map((link) =>
+      link.disabled ? (
+        <span
+          class:list={[
+            "link-button",
+            "link-button--disabled",
+            link.kind === "primary" && "link-button--primary",
+          ]}
+          role="button"
+          tabindex="0"
+          aria-disabled="true"
+          title={link.tooltip}
+          data-tooltip={link.tooltip}
+        >
+          {link.label}
+        </span>
+      ) : (
+        <a
+          class:list={["link-button", link.kind === "primary" && "link-button--primary"]}
+          href={hrefFor(link.href)}
+          target={link.href.startsWith("http") ? "_blank" : undefined}
+          rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+          title={link.tooltip}
+        >
+          {link.label}
+        </a>
+      ),
+    )
+  }
+</div>

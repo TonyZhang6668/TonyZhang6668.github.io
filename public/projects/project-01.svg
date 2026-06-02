@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Research project preview</title>
+  <desc id="desc">Abstract preview graphic with nodes and connections.</desc>
+  <rect width="640" height="420" fill="#f7faf9"/>
+  <rect x="58" y="58" width="524" height="304" rx="8" fill="#ffffff" stroke="#dde2e5"/>
+  <circle cx="178" cy="168" r="42" fill="#1d6f74"/>
+  <circle cx="318" cy="124" r="34" fill="#a46b1f"/>
+  <circle cx="438" cy="230" r="54" fill="#134f54"/>
+  <path d="M218 156l67-22M346 148l58 50M220 188l169 39" stroke="#8aa3a6" stroke-width="8" stroke-linecap="round"/>
+  <rect x="132" y="298" width="246" height="14" rx="7" fill="#c8d7d8"/>
+  <rect x="132" y="326" width="154" height="14" rx="7" fill="#dde2e5"/>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Research system preview</title>
+  <desc id="desc">Abstract software system preview graphic.</desc>
+  <rect width="640" height="420" fill="#f7faf9"/>
+  <rect x="70" y="76" width="500" height="268" rx="8" fill="#ffffff" stroke="#dde2e5"/>
+  <rect x="110" y="116" width="156" height="78" rx="8" fill="#e8f4f4" stroke="#1d6f74"/>
+  <rect x="374" y="116" width="156" height="78" rx="8" fill="#fff7e9" stroke="#a46b1f"/>
+  <rect x="242" y="238" width="156" height="78" rx="8" fill="#eff3f4" stroke="#134f54"/>
+  <path d="M266 155h108M452 194v44M320 238l-87-44M320 238l87-44" stroke="#8aa3a6" stroke-width="8" stroke-linecap="round"/>
+  <rect x="130" y="146" width="74" height="12" rx="6" fill="#1d6f74"/>
+  <rect x="394" y="146" width="96" height="12" rx="6" fill="#a46b1f"/>
+  <rect x="270" y="268" width="100" height="12" rx="6" fill="#134f54"/>
+</svg>

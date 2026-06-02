@@ -1,0 +1,71 @@
+---
+import type { Publication } from "../types";
+
+type Props = {
+  publication: Publication;
+};
+
+const { publication } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+// Split into individual authors so each can carry an optional marker and the
+// profile owner's name can be emphasized.
+const marks = publication.authorMarks ?? {};
+const authorList = publication.authors.split(",").map((name) => {
+  const trimmed = name.trim();
+  return {
+    name: trimmed,
+    mark: marks[trimmed],
+    isMe: publication.highlight === trimmed,
+  };
+});
+---
+
+<article class="pub-entry">
+  {publication.thumbnail && (
+    <img
+      class="pub-thumb"
+      src={`${base}${publication.thumbnail}`}
+      alt={`Figure for ${publication.title}`}
+      loading="lazy"
+    />
+  )}
+  <div class="pub-body">
+    <div class="pub-title-row">
+      <h3 class="pub-title">{publication.title}</h3>
+      {typeof publication.stars === "number" && (
+        <span class="pub-stars">★ {publication.stars}</span>
+      )}
+    </div>
+    <p class="pub-authors">
+      {authorList.map((author, index) => (
+        <>
+          {author.isMe ? <strong>{author.name}</strong> : author.name}
+          {author.mark && <sup class="pub-mark">{author.mark}</sup>}
+          {index < authorList.length - 1 && <>, </>}
+        </>
+      ))}
+    </p>
+    {publication.legend && publication.legend.length > 0 && (
+      <p class="pub-legend">
+        {publication.legend.map((line, index) => (
+          <>
+            {index > 0 && <span class="pub-legend-sep"> · </span>}
+            {line}
+          </>
+        ))}
+      </p>
+    )}
+    <div class="pub-meta">
+      {publication.venueTag && <span class="pub-venue-badge">{publication.venueTag}</span>}
+      {publication.venueNote && <span class="pub-venue-note">{publication.venueNote}</span>}
+    </div>
+    {publication.links.length > 0 && (
+      <p class="pub-links">
+        {publication.links.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer">[{link.label}]</a>
+        ))}
+      </p>
+    )}
+  </div>
+</article>

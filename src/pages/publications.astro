@@ -1,0 +1,33 @@
+---
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+import TopBar from "../components/TopBar.astro";
+import { publications } from "../data/site";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Publications | Jiadong Zhang"
+  description="Selected publications and research works by Jiadong Zhang."
+  canonicalPath="/publications"
+>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <TopBar activePage="publications" />
+  <div class="site-shell publications-page-shell">
+    <Nav context="publications" />
+    <main id="main" class="content-stack">
+      <section id="publications" class="section section-block section-publications publications-page-section">
+        <div class="section-heading">
+          <p class="eyebrow">Publications</p>
+          <h1>Publications</h1>
+          <p>Selected papers and preprints.</p>
+        </div>
+        <div class="publication-list">
+          {publications.map((publication) => <PublicationCard publication={publication} />)}
+        </div>
+      </section>
+    </main>
+  </div>
+  <Footer />
+</Layout>

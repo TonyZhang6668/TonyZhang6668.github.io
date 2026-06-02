@@ -1,0 +1,18 @@
+---
+import Nav from "../components/Nav.astro";
+import Layout from "../layouts/Layout.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Page Not Found | Academic Personal Website" description="The requested page could not be found.">
+  <Nav />
+  <main class="site-shell">
+    <section class="intro-panel">
+      <p class="eyebrow">404</p>
+      <h1>Page not found</h1>
+      <p class="lede">The page you requested does not exist. Return to the homepage to continue browsing the academic profile.</p>
+      <p><a class="link-button link-button--primary" href={base}>Go home</a></p>
+    </section>
+  </main>
+</Layout>

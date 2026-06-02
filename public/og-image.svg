@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Academic personal website preview</title>
+  <desc id="desc">Social preview image for the academic personal website.</desc>
+  <rect width="1200" height="630" fill="#fbfbfa"/>
+  <rect x="92" y="82" width="1016" height="466" rx="8" fill="#ffffff" stroke="#dde2e5"/>
+  <circle cx="252" cy="258" r="78" fill="#1d6f74"/>
+  <path d="M128 470c34-96 79-144 124-144s90 48 124 144" fill="#134f54"/>
+  <text x="452" y="235" fill="#232323" font-family="Arial, sans-serif" font-size="58" font-weight="700">Academic Personal Website</text>
+  <text x="452" y="312" fill="#134f54" font-family="Arial, sans-serif" font-size="34" font-weight="700">Research · Experience · Selected Work</text>
+  <text x="452" y="380" fill="#686f75" font-family="Arial, sans-serif" font-size="28">A concise profile for prospective advisors and collaborators.</text>
+  <path d="M452 442h360" stroke="#a46b1f" stroke-width="10" stroke-linecap="round"/>
+</svg>

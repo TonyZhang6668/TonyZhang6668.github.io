@@ -1,0 +1,183 @@
+---
+import Footer from "../components/Footer.astro";
+import LinkButtons from "../components/LinkButtons.astro";
+import Nav from "../components/Nav.astro";
+import PublicationCard from "../components/PublicationCard.astro";
+import Section from "../components/Section.astro";
+import TopBar from "../components/TopBar.astro";
+import {
+  awards,
+  education,
+  experiences,
+  profile,
+  publications,
+  researchApplications,
+  researchAreas,
+  researchOverview,
+} from "../data/site";
+import Layout from "../layouts/Layout.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <TopBar activePage="home" />
+  <div class="site-shell">
+    <Nav />
+    <main id="main" class="content-stack">
+      <section id="home" class="home-section section-block section-home" aria-labelledby="intro-title">
+        <div class="home-profile">
+          <img
+            class="profile-photo"
+            src={`${base}${profile.headshot}`}
+            alt={`Portrait of ${profile.name}`}
+          />
+          <div>
+            <p class="eyebrow">Home</p>
+            <h1 id="intro-title">{profile.name}</h1>
+            <p class="profile-title">{profile.title}</p>
+            <p class="profile-meta">{profile.affiliation} · {profile.location}</p>
+            <p class="lede">{profile.summary}</p>
+            <p class="profile-availability">{profile.availability}</p>
+            <LinkButtons links={profile.links} />
+          </div>
+        </div>
+
+        <div class="home-subsection research-overview">
+          <p class="research-eyebrow">{researchOverview.eyebrow}</p>
+          <h2>{researchOverview.title}</h2>
+          <p class="research-lede">{researchOverview.lede}</p>
+          <div class="research-pillars">
+            {researchAreas.map((area) => (
+              <article class="research-pillar">
+                <h3>{area.title}</h3>
+                <p>{area.summary}</p>
+                <div class="tag-list" aria-label={`Keywords for ${area.title}`}>
+                  {area.keywords.map((keyword) => <span>{keyword}</span>)}
+                </div>
+              </article>
+            ))}
+          </div>
+          <div class="research-applications" aria-label="Validation platforms">
+            <span class="research-applications-label">Validated across</span>
+            <ul>
+              {researchApplications.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+          <p class="research-closing">{researchOverview.closing}</p>
+        </div>
+      </section>
+
+      <Section
+        id="experience"
+        title="Experience"
+      >
+        <div class="experience-board">
+          <div class="experience-column">
+            <h3>Education</h3>
+            <div class="credential-list">
+              {education.map((entry) => (
+                <article class="credential-item">
+                  {entry.logo ? (
+                    <img class="credential-logo" src={`${base}${entry.logo}`} alt={`${entry.organization} logo`} loading="lazy" />
+                  ) : (
+                    <span class="credential-mark" aria-hidden="true">{entry.organization.charAt(0)}</span>
+                  )}
+                  <div class="credential-main">
+                    <div class="credential-row">
+                      <h4>{entry.organization}</h4>
+                      <time>{entry.date}</time>
+                    </div>
+                    <p>{entry.title}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <h3 class="credential-subhead">Selected Awards</h3>
+            <ul class="award-list">
+              {awards.map((award) => (
+                <li>
+                  <div class="award-row">
+                    <span class="award-title">{award.title}</span>
+                    <time>{award.date}</time>
+                  </div>
+                  <span class="award-org">{award.organization}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="experience-column">
+            <h3>Experience</h3>
+            <div class="credential-list">
+              {experiences.map((item) => (
+                <article class="credential-item">
+                  {item.logo ? (
+                    <img class="credential-logo" src={`${base}${item.logo}`} alt={`${item.institution} logo`} loading="lazy" />
+                  ) : (
+                    <span class="credential-mark" aria-hidden="true">{item.institution.charAt(0)}</span>
+                  )}
+                  <div class="credential-main">
+                    <div class="credential-row">
+                      <h4>{item.institution}</h4>
+                      <time>{item.start} - {item.end}</time>
+                    </div>
+                    <p>
+                      {item.role}
+                      {item.lab && <> · {item.lab}</>}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section
+        id="publications"
+        title="Publications"
+        intro="Selected papers and preprints."
+      >
+        <div class="publication-list">
+          {publications.map((publication) => <PublicationCard publication={publication} />)}
+        </div>
+      </Section>
+    </main>
+  </div>
+  <Footer />
+  <script is:inline>
+    const links = Array.from(document.querySelectorAll("[data-section-link]"));
+    const sections = links
+      .map((link) => document.getElementById(link.dataset.sectionLink))
+      .filter(Boolean);
+
+    const setActive = (id) => {
+      links.forEach((link) => {
+        link.classList.toggle("is-active", link.dataset.sectionLink === id);
+      });
+    };
+
+    const activeFromHash = () => {
+      const id = location.hash.replace("#", "") || "home";
+      if (sections.some((section) => section.id === id)) setActive(id);
+    };
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible?.target?.id) setActive(visible.target.id);
+        },
+        { rootMargin: "-22% 0px -55% 0px", threshold: [0.15, 0.35, 0.65] },
+      );
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    window.addEventListener("hashchange", activeFromHash);
+    activeFromHash();
+  </script>
+</Layout>

@@ -1,0 +1,26 @@
+---
+import { profile } from "../data/site";
+
+type Props = {
+  activePage?: "home" | "publications";
+};
+
+const { activePage = "home" } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-left">
+      <a class="top-name" href={base}>{profile.name}</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark theme">
+        <span aria-hidden="true">⚙</span>
+        <span data-theme-label>Theme: Linen</span>
+      </button>
+    </div>
+    <nav class="top-nav" aria-label="Page navigation">
+      <a class:list={[activePage === "home" && "is-active"]} href={base}>Home</a>
+      <a class:list={[activePage === "publications" && "is-active"]} href={`${base}publications`}>Publications</a>
+    </nav>
+  </div>
+</header>

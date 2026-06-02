@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Data modeling preview</title>
+  <desc id="desc">Abstract chart preview graphic.</desc>
+  <rect width="640" height="420" fill="#fbfbfa"/>
+  <rect x="64" y="64" width="512" height="292" rx="8" fill="#ffffff" stroke="#dde2e5"/>
+  <path d="M116 298c58-70 98-88 146-58 49 31 82 30 121-21 40-52 82-78 141-62" fill="none" stroke="#1d6f74" stroke-width="12" stroke-linecap="round"/>
+  <path d="M116 310h408M116 112v198" stroke="#dde2e5" stroke-width="6" stroke-linecap="round"/>
+  <rect x="142" y="148" width="52" height="92" fill="#a46b1f"/>
+  <rect x="230" y="188" width="52" height="52" fill="#c99b55"/>
+  <rect x="318" y="132" width="52" height="108" fill="#134f54"/>
+  <rect x="406" y="164" width="52" height="76" fill="#85b7b8"/>
+</svg>

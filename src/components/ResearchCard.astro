@@ -1,0 +1,20 @@
+---
+import type { ResearchArea } from "../types";
+
+type Props = {
+  area: ResearchArea;
+};
+
+const { area } = Astro.props;
+---
+
+<article class="research-card">
+  <h3>{area.title}</h3>
+  <p>{area.summary}</p>
+  <div class="tag-list" aria-label={`Keywords for ${area.title}`}>
+    {area.keywords.map((keyword) => <span>{keyword}</span>)}
+  </div>
+  <p class="related-projects">
+    <strong>Representative directions:</strong> {area.relatedProjects.join(" · ")}
+  </p>
+</article>

@@ -1,0 +1,40 @@
+---
+type Props = {
+  context?: "home" | "publications";
+};
+
+const { context = "home" } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const isPublicationsPage = context === "publications";
+const items = [
+  { label: "Profile", href: `${base}#home`, section: "home", tone: "home" },
+  { label: "Experience", href: `${base}#experience`, section: "experience", tone: "experience" },
+  {
+    label: "Publications",
+    href: isPublicationsPage ? `${base}publications` : `${base}#publications`,
+    section: "publications",
+    tone: "publications",
+  },
+];
+---
+
+<aside class="site-nav" aria-label="Section navigation">
+  <nav>
+    {
+      items.map((item) => (
+        <a
+          class:list={[
+            "nav-link",
+            `nav-link--${item.tone}`,
+            isPublicationsPage && item.section === "publications" && "is-active",
+          ]}
+          data-section-link={item.section}
+          href={item.href}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+</aside>
